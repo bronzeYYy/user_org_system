@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: gateway
+  profiles:
+    active: -company
+  cloud:
+    gateway:
+      routes:
+        - id: orgSystem
+          uri: lb://org
+          predicates:
+            - Path=/org/**
+          filters:
+            - StripPrefix=1
+
+        - id: roleSystem
+          uri: lb://role
+          predicates:
+            - Path=/role/**
+          filters:
+            - StripPrefix=1
+
+        - id: userSystem
+          uri: lb://user
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+server:
+  port: 8091
+eureka:
+  host: 127.0.0.1
+  port: 8090
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${eureka.host}:${eureka.port}/eureka/

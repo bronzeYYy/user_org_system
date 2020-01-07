@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: role
+server:
+  port: 8071
+eureka:
+  host: 127.0.0.1
+  port: 8090
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${eureka.host}:${eureka.port}/eureka/

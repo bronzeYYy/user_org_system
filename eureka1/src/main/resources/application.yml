@@ -1,0 +1,14 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: eureka1
+  profiles:
+    active: -company
+eureka:
+  host: 10.2.72.63
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://${eureka.host}:${server.port}/eureka/
