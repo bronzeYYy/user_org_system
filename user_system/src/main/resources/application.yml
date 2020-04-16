@@ -1,8 +1,15 @@
 spring:
   application:
     name: user
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_org_system?characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  profiles:
+    active: -company
 server:
-  port: 8072
+  port: 8052
 eureka:
   host: 127.0.0.1
   port: 8090
@@ -11,3 +18,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://${eureka.host}:${eureka.port}/eureka/
+#    enabled: false
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #驼峰
+  mapper-locations: classpath:mapper/*
+gateway:
+  enable: true

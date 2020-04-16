@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chen.user_org_system.gateway.dao.RoleDao">
+  <select id="findAll" resultMap="rbModel">
+    select distinct(role_id) from role_button
+  </select>
+  <select id="findButtonIdsByRoleId" resultType="java.lang.Integer">
+    select button_id from role_button where role_id = #{roleId}
+  </select>
+  <select id="findAllMenus" resultMap="mModel">
+    select * from menu
+  </select>
+  <select id="findButtonByMenu" resultType="java.lang.Integer">
+    select * from button where menu_id = #{menuId}
+  </select>
+  <select id="findMenuByButtonIds" resultType="cn.chen.user_org_system.common.model.MenuModel">
+    select * from menu where id in (select menu_id from button where button.id in
+    <foreach item="item"  collection="buttonIds" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    )
+  </select>
+  <select id="findButtonByIds" resultType="cn.chen.user_org_system.common.entity.Button">
+    select * from button where id in
+    <foreach collection="buttonIds" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </select>
+  <resultMap id="rbModel" type="cn.chen.user_org_system.common.model.RoleButtonModel">
+    <result property="roleId" column="role_id"/>
+    <association property="buttonIds" column="role_id" select="findButtonIdsByRoleId"/>
+  </resultMap>
+  <resultMap id="mModel" type="cn.chen.user_org_system.common.model.MenuModel">
+    <result property="id" column="id" />
+    <association property="buttons" column="id" select="findButtonByMenu" />
+  </resultMap>
+</mapper>

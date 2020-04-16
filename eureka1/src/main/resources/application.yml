@@ -6,9 +6,11 @@ spring:
   profiles:
     active: -company
 eureka:
-  host: 10.2.72.63
+  host: 127.0.0.1
   instance:
     prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://${eureka.host}:${server.port}/eureka/
+    register-with-eureka: false
+    fetch-registry: false

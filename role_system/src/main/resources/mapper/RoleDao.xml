@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chen.user_org_system.role_system.dao.RoleDao">
+  <insert id="insert"></insert>
+  <update id="update">
+
+  </update>
+  <delete id="delete">
+    delete from role where id = #{id}
+  </delete>
+  <select id="count" resultType="int">
+    select count(id) from role
+  </select>
+  <select id="findById" resultType="cn.chen.user_org_system.common.entity.Role">
+    select * from role where id = #{id}
+  </select>
+  <select id="find" resultType="cn.chen.user_org_system.common.entity.Role">
+    select * from role where limit #{param1}, #{param2}
+  </select>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chen.user_org_system.role_system.dao.MainDao">
+  <select id="getMenus" resultType="cn.chen.user_org_system.common.entity.Menu" parameterType="list">
+    select * from menu where id in (select menu_id from button where button.id in
+    <foreach collection="buttons" separator="," open="(" close=")">
+      #{buttons}
+    </foreach>
+    )
+
+  </select>
+  <select id="getButtons" resultType="integer">
+    select id from role_button where role_id = #{menuId}
+  </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.chen.user_org_system.org_system.dao.OrgDao">
+  <insert id="insert"></insert>
+  <update id="update"></update>
+  <delete id="delete"></delete>
+  <select id="count" resultType="int">
+    select count(id) from org
+  </select>
+  <select id="findById" resultType="cn.chen.user_org_system.common.entity.Org">
+    select * from org where id = #{id}
+  </select>
+  <select id="findOrg" resultType="cn.chen.user_org_system.common.entity.Org">
+    select * from org limit #{param1}, #{param2}
+  </select>
+</mapper>
